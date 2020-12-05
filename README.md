@@ -19,31 +19,27 @@ TODO: insert image
 
 This implementation implements the following funcionality:
 
-* Button 0: Dim display backlight by 1/8th of full brightness
-            for each press until display reaches "off" state.
-            When in the "off" state, the next button press turns
-            display backlight back to full brightness.
-            This uses GPIO 18, which is connected to the backlight LEDs
-            on the PiTFT 2.8" Plus.
+* Button 0:
+  - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state. When in the "off" state, the next button press turns display backlight back to full brightness. This uses GPIO 18, which is connected to the backlight LEDs on the PiTFT 2.8" Plus.
 
-* Button 1: Run the Pi-Hole system updater
-            Press this button when you see the display showing "Updates are available".
+* Button 1:
+  - Run the Pi-Hole system updater---Press this button when you see the display showing "Updates are available".
 			The update function checks to see if an update is needed, and does nothing
 			if the PiHole is already up-to-date.
-
-* Button 2: Run the Pi-Hole gravity updater
+* Button 2:
+  - Run the Pi-Hole gravity updater
 			(TODO: not yet implemented)
             Press and hold for more than 2 seconds when you have added
             or changed Ad-lists, and need to update Pi-Hole DBs.
 
-* Button 3: Restart or Shutdown
-            - To Restart Pi, press and hold for more than 2 seconds, but less than 5 seconds.
-            - To Shutdown Pi, press and hold for more than 5 seconds.
-
-			NOTE: The display will "blink" to indicate what will happen when you release button.
-			When you see:
-			* one blink, releasing button will restart Pi
-			* a second blink, releasing button will shutdown Pi
+* Button 3:
+  - Restart or Shutdown
+    - To Restart Pi, press and hold for more than 2 seconds, but less than 5 seconds.
+    - To Shutdown Pi, press and hold for more than 5 seconds.
+    - NOTE: The display will "blink" to indicate what will happen when you release button.
+            When you see:
+      * one blink, releasing button will restart Pi
+      * a second blink, releasing button will shutdown Pi
 
 (Modify python code to suit your needs)
 
@@ -83,32 +79,32 @@ TODO: insert image
 ### Software
 
 The software is installed with the following commands:
-
-    sudo apt install python3-gpiozero
-    git clone https://github.com/andersix/pitft_buttons.git
-    cd ~/pitft_buttons
-    chmod +x pitft_buttons.py
-    sudo cp pitft_buttons.py /usr/local/bin
-    sudo cp pitft_buttons.service /etc/systemd/system
-    sudo systemctl enable pitft_buttons.service
-    sudo systemctl start pitft_buttons.service
-
+```
+sudo apt install python3-gpiozero
+git clone https://github.com/andersix/pitft_buttons.git
+cd ~/pitft_buttons
+chmod +x pitft_buttons.py
+sudo cp pitft_buttons.py /usr/local/bin
+sudo cp pitft_buttons.service /etc/systemd/system
+sudo systemctl enable pitft_buttons.service
+sudo systemctl start pitft_buttons.service
+```
 ## Troubleshooting
 
 Check the status of the program at any time with the command:
-
-    sudo systemctl status pitft_buttons.service
-
+```
+sudo systemctl status pitft_buttons.service
+```
 This should produce output similar to:
-
-    ● pitft_buttons.service - PiTFT GPIO buttons
-       Loaded: loaded (/home/pi/PiTFT28_buttons/pitft_buttons.service; enabled; vendor preset: enabled)
-       Active: active (running) since Wed 2020-12-02 21:33:39 MST; 21h ago
-     Main PID: 609 (python3)
-        Tasks: 5 (limit: 1601)
-       CGroup: /system.slice/pitft_buttons.service
-               └─609 /usr/bin/python3 /usr/local/bin/pitft_buttons.py
-
+```
+● pitft_buttons.service - PiTFT GPIO buttons
+   Loaded: loaded (/home/pi/PiTFT28_buttons/pitft_buttons.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-12-02 21:33:39 MST; 21h ago
+ Main PID: 609 (python3)
+    Tasks: 5 (limit: 1601)
+   CGroup: /system.slice/pitft_buttons.service
+           └─609 /usr/bin/python3 /usr/local/bin/pitft_buttons.py
+```
 You should have "Active: active (running)".
 If not check
  * for syntax errors in python code, if you modified it.
@@ -118,4 +114,3 @@ If not check
 ## Modifications
 
 Go for it. You can do it.
-
