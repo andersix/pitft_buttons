@@ -1,8 +1,8 @@
-# PiTFT 2.8" Plus 320x240 TFT Pi-Hole (or other) buttons
+# PiTFT Pi-Hole (or other) buttons
 
 This is a python module and companion systemd service file,
 performing useful functions using the four built-in buttons
-on the display panel PCB.
+on the PiTFT 2.8" Plus 320x240 TFT display panel PCB.
 
 I use this display on a running Pi-Hole to display the Pi-Hole status.
 The buttons are used for things like dimming the display, updating, and
@@ -27,9 +27,9 @@ This implementation implements the following funcionality:
             on the PiTFT 2.8" Plus.
 
 * Button 1: Run the Pi-Hole system updater
-            (TODO: not yet implemented)
-            Press and hold for more than 2 seconds when you see the
-            display showing "Updates are available"
+            Press this button when you see the display showing "Updates are available".
+			The update function checks to see if an update is needed, and does nothing
+			if the PiHole is already up-to-date.
 
 * Button 2: Run the Pi-Hole gravity updater
 			(TODO: not yet implemented)
@@ -37,11 +37,10 @@ This implementation implements the following funcionality:
             or changed Ad-lists, and need to update Pi-Hole DBs.
 
 * Button 3: Restart or Shutdown
-            - To Restart Pi, press and hold for more than 2 seconds,
-              but less than 5 seconds.
+            - To Restart Pi, press and hold for more than 2 seconds, but less than 5 seconds.
             - To Shutdown Pi, press and hold for more than 5 seconds.
-			This "hold to restart/shutdown" button will "blink" the display
-			to indicate what will happen when you release button.
+
+			NOTE: The display will "blink" to indicate what will happen when you release button.
 			When you see:
 			* one blink, releasing button will restart Pi
 			* a second blink, releasing button will shutdown Pi
