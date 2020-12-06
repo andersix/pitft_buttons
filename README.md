@@ -83,16 +83,26 @@ TODO: insert image
 ### Software
 
 The software is installed with the following commands:
+(This assumes PiHole is already installed and running on your Pi)
 ```
-sudo apt install python3-gpiozero
+sudo apt install python3-gpiozero git
+cd ~
 git clone https://github.com/andersix/pitft_buttons.git
 cd ~/pitft_buttons
 chmod +x pitft_buttons.py
-sudo cp pitft_buttons.py /usr/local/bin
-sudo cp pitft_buttons.service /etc/systemd/system
+sudo ln -s ~/pitft_buttons/pitft_buttons.py /usr/local/bin/.
+sudo ln -s ~/pitft_buttons/pitft_buttons.service /etc/systemd/system/.
 sudo systemctl enable pitft_buttons.service
 sudo systemctl start pitft_buttons.service
 ```
+If there are updates to this project at any time, and you want them, just pull them.
+```
+cd ~/pitft_buttons
+git pull
+sudo systemctl stop pitft_buttons.service
+sudo systemctl start pitft_buttons.service
+```
+
 ## Troubleshooting
 
 Check the status of the program at any time with the command:
