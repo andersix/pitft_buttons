@@ -20,17 +20,22 @@ TODO: insert image
 This implementation implements the following funcionality:
 
 * Button 0:
-  - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state. When in the "off" state, the next button press turns display backlight back to full brightness. This uses GPIO 18, which is connected to the backlight LEDs on the PiTFT 2.8" Plus.
+  - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state.
+When in the "off" state, the next button press turns display backlight back to full brightness.
+The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to this GPIO. The PWM is gamma-corrected so the 1/8th steps "look good".
 
 * Button 1:
   - Run the Pi-Hole system updater---Press this button when you see the display showing "Updates are available".
 			The update function checks to see if an update is needed, and does nothing
 			if the PiHole is already up-to-date.
+            The display flashes while the updating is running.
+            Results are logged in syslog, so check /var/log/messages for results.
+
 * Button 2:
   - Run the Pi-Hole gravity updater
-			(TODO: not yet implemented)
-            Press and hold for more than 2 seconds when you have added
-            or changed Ad-lists, and need to update Pi-Hole DBs.
+            Press button when you have added or changed Ad-lists and need to update Pi-Hole DBs.
+            The display flashes while the updating is running.
+            Results are logged in syslog, so check /var/log/messages for results.
 
 * Button 3:
   - Restart or Shutdown
@@ -41,7 +46,6 @@ This implementation implements the following funcionality:
       * one blink, releasing button will restart Pi
       * a second blink, releasing button will shutdown Pi
 
-(Modify python code to suit your needs)
 
 ## Requirements
 
@@ -50,19 +54,19 @@ This implementation implements the following funcionality:
 * A Raspberry Pi (tested on a model 3B and 3B+)
 
 * Adafruit PiTFT Plus 320x240 2.8" TFT (assembled with four buttons on the side.)
-  https://www.adafruit.com/product/2423
+  - https://www.adafruit.com/product/2423
 
 ### Software
 
 * Raspberry Pi OS -- LITE (no desktop)
-  Tested on: "Raspbian GNU/Linux 10 (buster)"
-  http://www.raspbian.org/
+  - Tested on: "Raspbian GNU/Linux 10 (buster)"
+  - http://www.raspbian.org/
 
 * Python 3
 
 * python3-gpiozero package
-  Tested on Version: 1.5.1
-  Homepage: http://gpiozero.readthedocs.io/
+  - Tested on Version: 1.5.1
+  - Homepage: http://gpiozero.readthedocs.io/
 
 * git
 
