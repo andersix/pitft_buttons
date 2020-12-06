@@ -58,9 +58,9 @@ The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to t
 
 ### Software
 
-* Raspberry Pi OS -- LITE (no desktop)
+* Raspberry Pi OS Lite
   - Tested on: "Raspbian GNU/Linux 10 (buster)"
-  - http://www.raspbian.org/
+  - https://www.raspberrypi.org/software/operating-systems/
 
 * Python 3
 
