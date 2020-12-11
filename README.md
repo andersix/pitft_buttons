@@ -54,6 +54,7 @@ The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to t
 * A Raspberry Pi (tested on a model 3B and 3B+)
 
 * Adafruit PiTFT Plus 320x240 2.8" TFT (assembled with four buttons on the side.)
+  - I got the capacitive one
   - https://www.adafruit.com/product/2423
 
 ### Software
@@ -64,13 +65,16 @@ The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to t
 
 * Python 3
 
+* git
+
+* Adafruit Raspberry Pi Installer scripts
+  - https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi
+
+* Pi-Hole (optional, but this is what I'm using it for)
+
 * python3-gpiozero package
   - Tested on Version: 1.5.1
   - Homepage: http://gpiozero.readthedocs.io/
-
-* git
-
-* Pi-Hole (optional, but this is what I'm using it for)
 
 ## Installation
 
@@ -82,8 +86,31 @@ TODO: insert image
 
 ### Software
 
-The software is installed with the following commands:
-(This assumes PiHole is already installed and running on your Pi)
+#### Git
+If you don't have git, install it with
+```
+sudo apt install git
+```
+
+#### Get the Adafruit installer scripts for the PiTFT:
+```
+cd ~
+sudo pip3 install --upgrade adafruit-python-shell click==7.0
+sudo apt-get install -y git
+git clone https://github.com/adafruit/Raspberry-Pi-Installer-Scripts.git
+cd Raspberry-Pi-Installer-Scripts
+```
+
+#### Pick the appropriate installer
+I'm using the PiTFT 2.8 Capacive, so am using:
+```
+sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=console
+```
+
+#### Reboot and return to here
+Once the PiTFT script is installed, reboot your Pi, and return to the next step below.
+
+#### Install the buttons code
 ```
 sudo apt install python3-gpiozero git
 cd ~
