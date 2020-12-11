@@ -136,6 +136,11 @@ if [ "$TERM" == "linux" ] ; then
 fi
 ```
 
+#### Reboot and return to here
+After this reboot, the dipslay should show the PADD status screen for your PiHole.
+
+Now let's install the buttons code:
+
 #### Install the buttons code
 ```
 sudo apt install python3-gpiozero git
