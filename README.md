@@ -87,6 +87,11 @@ TODO: insert image
 
 ### Software
 
+#### PiHole
+* Get PiHole up and running for your network
+  - https://docs.pi-hole.net/main/basic-install/
+* Then return here for the rest...
+
 #### Git
 If you don't have git, install it with
 ```
@@ -103,7 +108,7 @@ cd Raspberry-Pi-Installer-Scripts
 ```
 
 #### Pick the appropriate installer
-I'm using the PiTFT 2.8 Capacive, so am using:
+I'm using the PiTFT 2.8 Capacitive, so am using:
 ```
 sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=console
 ```
