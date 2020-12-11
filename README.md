@@ -26,8 +26,8 @@ The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to t
 
 * Button 1:
   - Run the Pi-Hole system updater---Press this button when you see the display showing "Updates are available".
-			The update function checks to see if an update is needed, and does nothing
-			if the PiHole is already up-to-date.
+            The update function checks to see if an update is needed, and does nothing
+            if the PiHole is already up-to-date.
             The display flashes while the updating is running.
             Results are logged in syslog, so check /var/log/messages for results.
 
@@ -71,6 +71,7 @@ The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to t
   - https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi
 
 * Pi-Hole (optional, but this is what I'm using it for)
+  - padd.sh for status display
 
 * python3-gpiozero package
   - Tested on Version: 1.5.1
@@ -109,6 +110,26 @@ sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=consol
 
 #### Reboot and return to here
 Once the PiTFT script is installed, reboot your Pi, and return to the next step below.
+
+#### Install padd.sh
+I'm using this for PiHole status display, so let's use padd.sh
+```
+cd ~
+git clone https://github.com/pi-hole/PADD.git
+```
+Then have padd.sh launch at boot time.
+Edit your ~/.bashrc and at the bottom put:
+```
+# Run PADD
+# If we're on the PiTFT screen (ssh is xterm)
+if [ "$TERM" == "linux" ] ; then
+  while :
+  do
+    ./PADD/padd.sh
+    sleep 1
+  done
+fi
+```
 
 #### Install the buttons code
 ```
