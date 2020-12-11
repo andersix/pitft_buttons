@@ -1,4 +1,4 @@
-# PiTFT Pi-Hole (or other) buttons
+# Pi-Hole PiTFT (or other) buttons
 
 This is a python module and companion systemd service file,
 performing useful functions using the four built-in buttons
