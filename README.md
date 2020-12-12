@@ -17,7 +17,7 @@ In the python code, they are button0, button1, button2, and button3 respectively
 
 TODO: insert image
 
-This implementation implements the following funcionality:
+#### Button Functions
 
 * Button 0:
   - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state.
