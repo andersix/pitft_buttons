@@ -113,7 +113,9 @@ I'm using the PiTFT 2.8 Capacitive, so am using:
 ```
 sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=console
 ```
-
+* for other displays, or details, check here:
+  - https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/easy-install-2
+  
 #### Reboot and return to here
 Once the PiTFT script is installed, reboot your Pi, and return to the next step below.
 
