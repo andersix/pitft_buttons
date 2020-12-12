@@ -181,13 +181,7 @@ sudo ln -s ~/pitft_buttons/pitft_buttons.service /etc/systemd/system/.
 sudo systemctl enable pitft_buttons.service
 sudo systemctl start pitft_buttons.service
 ```
-If there are updates to this project at any time, and you want them, just pull them.
-```
-cd ~/pitft_buttons
-git pull
-sudo systemctl stop pitft_buttons.service
-sudo systemctl start pitft_buttons.service
-```
+That's it. The buttons should be working as described above. If you have issues, see the Troubleshooting section.
 
 ## Troubleshooting
 
@@ -210,6 +204,16 @@ If not check
  * for syntax errors in python code, if you modified it.
  * python file location
  * python and/or service file permissions
+
+## Updates
+If there are updates to this project at any time, and you want them, just pull them.
+```
+cd ~/pitft_buttons
+git pull
+sudo systemctl stop pitft_buttons.service
+sudo systemctl start pitft_buttons.service
+```
+
 
 ## Modifications
 
