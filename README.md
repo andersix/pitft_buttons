@@ -122,7 +122,12 @@ Once the PiTFT script is installed, reboot your Pi, and return to the next step 
 ```
 fbcon=map:10 fbcon=font:VGA8x8
 ```
-Save the file
+Save the file, and it should have
+```
+$ cat /boot/cmdline.txt
+console=serial0,115200 console=tty1 root=PARTUUID=XXXXXXXX-XX rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait fbcon=map:10 fbcon=font:VGA8x8
+```
+(NOTE: don't change the value for the PARTUUID in your cmdline.txt file)
 
 ##### Improve console font
 Run the command
