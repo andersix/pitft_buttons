@@ -117,6 +117,31 @@ sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=consol
 #### Reboot and return to here
 Once the PiTFT script is installed, reboot your Pi, and return to the next step below.
 
+#### Change the console font
+* Edit the /boot/cmdline.txt file and to the end of the line, after "rootwait", add:
+```
+fbcon=map:10 fbcon=font:VGA8x8
+```
+Save the file, and it should look something like:
+```
+$ cat /boot/cmdline.txt
+console=serial0,115200 console=tty1 root=PARTUUID=c3452e7bf-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait fbcon=map:10 fbcon=font:VGA8x8
+```
+##### Improve console font
+Run the command
+```
+sudo dpkg-reconfigure console-setup
+```
+and go select the following options to get Terminus 6x12
+* Encoding:
+  - UTF-8
+* Character set to support:
+  - Guess optimal character set
+* Font for the console:
+  - Terminus
+* Font size:
+  - 6x12 (framebuffer only)
+
 #### Install padd.sh
 I'm using this for PiHole status display, so let's use padd.sh
 ```
