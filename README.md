@@ -19,25 +19,25 @@ TODO: insert image
 
 #### Button Functions
 
-* Button 0:
+* Button 0 (GPIO 17):
   - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state.
 When in the "off" state, the next button press turns display backlight back to full brightness.
 The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to this GPIO. The PWM is gamma-corrected so the 1/8th steps "look good".
 
-* Button 1:
+* Button 1 (GPIO 22):
   - Run the Pi-Hole system updater---Press this button when you see the display showing "Updates are available".
             The update function checks to see if an update is needed, and does nothing
             if the PiHole is already up-to-date.
             The display flashes while the updating is running.
             Results are logged in syslog, so check /var/log/messages for results.
 
-* Button 2:
+* Button 2 (GPIO 23):
   - Run the Pi-Hole gravity updater
             Press button when you have added or changed Ad-lists and need to update Pi-Hole DBs.
             The display flashes while the updating is running.
             Results are logged in syslog, so check /var/log/messages for results.
 
-* Button 3:
+* Button 3 (GPIO 27):
   - Restart or Shutdown
     - To Restart Pi, press and hold for more than 2 seconds, but less than 5 seconds.
     - To Shutdown Pi, press and hold for more than 5 seconds.
