@@ -91,7 +91,7 @@ TODO: insert image
 #### PiHole
 * Get PiHole up and running for your network
   - https://docs.pi-hole.net/main/basic-install/
-* Then return here for the rest...
+* If you already have PiHole running, move along...
 
 #### Git
 If you don't have git, install it with
