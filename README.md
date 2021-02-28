@@ -99,6 +99,12 @@ If you don't have git, install it with
 sudo apt install git
 ```
 
+#### pip3
+If you don't have pip3, install it with
+```
+sudo apt install python3-pip
+```
+
 #### Get the Adafruit installer scripts for the PiTFT:
 ```
 cd ~
