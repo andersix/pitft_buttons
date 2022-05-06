@@ -26,17 +26,17 @@ TODO: insert image
 
 * Button 1 (GPIO 22):
   - Run the Pi-Hole system updater
-    - Press this button when you see the display showing "Updates are available".
+    - Press and hold button for one second when you see the display showing "Updates are available".
       The update function checks to see if an update is needed, and does nothing
       if the PiHole is already up-to-date.
-      The display flashes while the updating is running.
-      Results are logged in syslog, so check /var/log/messages for results.
+      Release button when the display begins flashing, indicating the the updater is checking and/or running.
+      Results are logged in syslog, so use journalctl, and/or check /var/log/messages, for results.
 
 * Button 2 (GPIO 23):
-  - Run the Pi-Hole gravity updater
-    - Press button when you have added or changed Ad-lists and need to update Pi-Hole DBs.
-      The display flashes while the updating is running.
-      Results are logged in syslog, so check /var/log/messages for results.
+  - Run the Pi-Hole gravity database updater
+    - Press and hold button for one second when you have added or changed Ad-lists and need to update Pi-Hole DBs.
+      Release the button when the display begins flashing, indicating the gravity updater is running.
+      Results are logged in syslog, so use journalctl, and/or check /var/log/messages, for results.
 
 * Button 3 (GPIO 27):
   - Restart or Shutdown
@@ -75,7 +75,7 @@ TODO: insert image
   - padd.sh for status display
 
 * python3-gpiozero package
-  - Tested on Version: 1.5.1
+  - Tested on Version: 1.5.1, or later
   - Homepage: http://gpiozero.readthedocs.io/
 
 ## Installation
@@ -103,6 +103,16 @@ sudo apt install git
 If you don't have pip3, install it with
 ```
 sudo apt install python3-pip
+```
+
+#### gpiozero
+If you don't have gpiozero, install it with
+```
+sudo apt install python3-gpiozero
+```
+or
+```
+sudo pip3 install gpiozero
 ```
 
 #### Get the Adafruit installer scripts for the PiTFT:
@@ -179,7 +189,6 @@ Now let's install the buttons code:
 
 #### Install the buttons code
 ```
-sudo apt install python3-gpiozero git
 cd ~
 git clone https://github.com/andersix/pitft_buttons.git
 cd ~/pitft_buttons

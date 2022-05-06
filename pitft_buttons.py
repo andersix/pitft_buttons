@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # vim:tabstop=4:softtabstop=4:shiftwidth=4:textwidth=79:expandtab:autoindent:fileformat=unix:
 
@@ -18,6 +18,8 @@ B3 = 27  # fourth button from the top on PiTFT+
 LEDPIN = 18  # Backlight LED is on GPIO 18 on PiTFT 2.8"s
 PWMF = 240  # PWM frequency for LED dimming
 
+
+
 class Buttons_PiTFTplus():
 
     def __init__(self):
@@ -30,16 +32,16 @@ class Buttons_PiTFTplus():
         self.led = PWMLED(pin=LEDPIN, initial_value=1.0, frequency=PWMF)
 
         # Button 0: Tie to LED backlight brightness function
-        self.led_button = Button(B0, bounce_time=.01)
+        self.led_button = Button(B0, bounce_time=.02)
         self.led_button.when_pressed = self.brightness
 
-        # Button 1: Tie to PiHole update function
+        # Button 1: Tie to PiHole update function : hold button for 1 second to initiate
         self.pihole_up_button = Button(B1)
-        self.pihole_up_button.when_pressed = self.pihole_update
+        self.pihole_up_button.when_held = self.pihole_update
 
-        # Button 2: Tie to PiHole update gravity DB.
+        # Button 2: Tie to PiHole update gravity DB : hold button for 1 second to initiate
         self.gu_button = Button(B2)
-        self.gu_button.when_pressed = self.pihole_gravity_up
+        self.gu_button.when_held = self.pihole_gravity_up
 
         # Button 3: Tie to Reset/Shutdown function
         self.rs_button = Button(B3, hold_time=1.0, hold_repeat=True)
@@ -127,6 +129,10 @@ class Buttons_PiTFTplus():
         If it does, do it. If not skip it.
         While updating, the display will continuously blink on/off
         """
+        # blink led while checking for update
+        last_led = self.led.value
+        self.led.value = 1.0
+        self.blink_display = True
         # first check if PiHole needs an update
         cmd = "pihole -up --check-only"
         sp = sproc.Popen(cmd, shell=True, stdout=sproc.PIPE, stderr=sproc.PIPE)
@@ -143,22 +149,21 @@ class Buttons_PiTFTplus():
         else:
             # run the updater
             cmd = "pihole -up"
-            self.led.value = 1.0
-            self.blink_display = True
             sp = sproc.Popen(cmd, shell=True, stdout=sproc.PIPE, stderr=sproc.PIPE)
             rc = sp.wait()
             out,err = sp.communicate()
             out = out.split(b'\n')
             for s in out:
                 syslog.syslog(s.decode("utf-8"))
-            self.blink_display = False
-            self.led.value = 1.0
+        self.blink_display = False
+        self.led.value = last_led
 
     def pihole_gravity_up(self):
         """
         Update gravity DB. Blink display while updating.
         """
         cmd = "pihole -g"
+        last_led = self.led.value
         self.led.value = 1.0
         self.blink_display = True
         sp = sproc.Popen(cmd, shell=True, stdout=sproc.PIPE, stderr=sproc.PIPE)
@@ -168,7 +173,7 @@ class Buttons_PiTFTplus():
         for s in out:
             syslog.syslog(s.decode("utf-8"))
         self.blink_display = False
-        self.led.value = 1.0
+        self.led.value = last_led
 
 
 
