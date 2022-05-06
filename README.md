@@ -54,9 +54,13 @@ TODO: insert image
 
 * A Raspberry Pi (tested on a model 3B and 3B+)
 
-* Adafruit PiTFT Plus 320x240 2.8" TFT (assembled with four buttons on the side.)
-  - I got the capacitive one
-  - https://www.adafruit.com/product/2423
+* Display and enclosure---modify/customize enclosure as you prefer, this is what I did:
+  - Adafruit PiTFT Plus 320x240 2.8" TFT (assembled with four buttons on the side.)
+    - https://www.adafruit.com/product/2423
+  - Faceplate and Buttons Pack for 2.8" PiTFTs
+    - https://www.adafruit.com/product/2807
+  - Pi Model B+ / Pi 2 / Pi 3 - Case Base and Faceplate Pack - Clear - for 2.8" PiTFT
+    - https://www.adafruit.com/product/3062
 
 ### Software
 
@@ -187,7 +191,7 @@ After this reboot, the dipslay should show the PADD status screen for your PiHol
 
 Now let's install the buttons code:
 
-#### Install the buttons code
+#### Install pitft buttons code and systemd service
 ```
 cd ~
 git clone https://github.com/andersix/pitft_buttons.git
