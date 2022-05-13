@@ -1,12 +1,14 @@
 [Unit]
 Description=PiTFT GPIO buttons
 After=network.target
+After=syslog.target
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
-User=root
+User=pi
+Group=pi
 ExecStart=/usr/bin/python3 /usr/local/bin/pitft_buttons.py
 
 [Install]

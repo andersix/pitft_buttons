@@ -2,12 +2,17 @@
 # -*- coding: utf-8 -*-
 # vim:tabstop=4:softtabstop=4:shiftwidth=4:textwidth=79:expandtab:autoindent:fileformat=unix:
 
+import os
+import sys
+import syslog
 from gpiozero import Button
 from gpiozero import PWMLED
+from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
-from signal import pause
-import syslog
+#from signal import pause
+import signal
 import subprocess as sproc
+import git
 
 # Looking at display, with buttons on the left:
 B0 = 17  # first  button from the top on PiTFT+
@@ -18,8 +23,6 @@ B3 = 27  # fourth button from the top on PiTFT+
 LEDPIN = 18  # Backlight LED is on GPIO 18 on PiTFT 2.8"s
 PWMF = 240  # PWM frequency for LED dimming
 
-
-
 class Buttons_PiTFTplus():
 
     def __init__(self):
@@ -29,15 +32,20 @@ class Buttons_PiTFTplus():
         self.blink_display = False
 
         # LED backlight setting and control
-        self.led = PWMLED(pin=LEDPIN, initial_value=1.0, frequency=PWMF)
+        fac_loc = PiGPIOFactory(host='127.0.0.1')
+        self.led = PWMLED(pin=LEDPIN, initial_value=1.0, frequency=PWMF, pin_factory=fac_loc)
 
         # Button 0: Tie to LED backlight brightness function
-        self.led_button = Button(B0, bounce_time=.02)
+        self.led_button = Button(B0, bounce_time=.01)
         self.led_button.when_pressed = self.brightness
 
         # Button 1: Tie to PiHole update function : hold button for 1 second to initiate
         self.pihole_up_button = Button(B1)
         self.pihole_up_button.when_held = self.pihole_update
+        # PADD display should be cloned into the pi user home dir
+        # hard-code the repo here so it can be updated by button 1
+        self.padd_repo_path = '/home/pi/PADD'
+        self.padd_repo = git.Repo(self.padd_repo_path)
 
         # Button 2: Tie to PiHole update gravity DB : hold button for 1 second to initiate
         self.gu_button = Button(B2)
@@ -110,13 +118,11 @@ class Buttons_PiTFTplus():
                     led_toggle()
                     sleep(.5)
                 self.blink1 = False
-                print("blink1")
             elif self.hold_time >= 5.0 and self.blink2:
                 for i in range(2):
                     led_toggle()
                     sleep(.5)
                 self.blink2 = False
-                print("blink2")
             elif self.blink_display:
                 led_toggle()
                 sleep(.5)
@@ -155,6 +161,17 @@ class Buttons_PiTFTplus():
             out = out.split(b'\n')
             for s in out:
                 syslog.syslog(s.decode("utf-8"))
+        # Pull PADD repo updates
+        try:
+            self.padd_repo.remotes.origin.pull()
+        except (git.exc.InvalidGitRepositoryError, git.exc.NoSuchPathError):
+            syslog.syslog("Invalid repository: {}".format(self.padd_repo_path))
+        # kill padd.sh: since it should have been started in your .bashrc, as described
+        # in the README, after the SIGKILL, it will restart again...
+        for line in os.popen("ps ax | grep padd.sh | grep -v grep"):
+            fields = line.split()
+            pid = fields[0]
+            os.kill(int(pid), signal.SIGKILL)
         self.blink_display = False
         self.led.value = last_led
 
@@ -180,5 +197,5 @@ class Buttons_PiTFTplus():
 if __name__ == '__main__':
 
     pb = Buttons_PiTFTplus()
-    pause() # keep this sumbitch runnin'
+    signal.pause() # keep this sumbitch runnin'
 

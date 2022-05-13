@@ -1,0 +1,10 @@
+[Unit]
+Description=Pigpio daemon
+
+[Service]
+Type=forking
+# Local only, disable alert sampling
+ExecStart=/usr/bin/pigpiod -m -n localhost
+
+[Install]
+WantedBy=multi-user.target

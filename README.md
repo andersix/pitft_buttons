@@ -93,7 +93,7 @@ TODO: insert image
 ### Software
 
 #### PiHole
-* Get PiHole up and running for your network
+* Install PiHole and get it up and running for your network
   - https://docs.pi-hole.net/main/basic-install/
 * If you already have PiHole running, move along...
 
@@ -118,6 +118,22 @@ or
 ```
 sudo pip3 install gpiozero
 ```
+
+#### pigpio
+If you don't have pigpio, install it with
+```
+sudo apt install pigpio
+```
+* enter ```sudo raspi-config``` on the command line, and enable Remote GPIO.
+  - select "3 Interface Options", then "P8 Remote GPIO", then "Yes" to enable.
+  - select OK then Finish to exit raspi-config
+* link the pigiod.service file to the systemd directory
+  - ```cd ~/pitft_buttons```
+  - ```sudo ln -s pigpiod.service /etc/systemd/system/.```
+* enable and start the gpio service
+  - ```sudo systemctl enable pigpiod```
+  - ```sudo systemctl start pigpiod```
+  - NOTE: starting and enabling the pigpiod service will not allow remote connections unless configured accordingly, but that's OK since we're only using it locally.
 
 #### Get the Adafruit installer scripts for the PiTFT:
 ```
@@ -191,7 +207,7 @@ After this reboot, the dipslay should show the PADD status screen for your PiHol
 
 Now let's install the buttons code:
 
-#### Install pitft buttons code and systemd service
+#### Install pitft buttons code and link the systemd service
 ```
 cd ~
 git clone https://github.com/andersix/pitft_buttons.git
@@ -227,15 +243,17 @@ If not check
  * python and/or service file permissions
 
 ## Updates
-If there are updates to this project at any time, and you want them, just pull them.
-```
-cd ~/pitft_buttons
-git pull
-sudo systemctl stop pitft_buttons.service
-sudo systemctl start pitft_buttons.service
-```
+* **2022-5-09**
+  Now using the pigpio factory. Why? I was annoyed that the PWMLED would _flash_, or _glitch_ the display backlight randomly when dimmed. By changing to the pigpio factory, this annoying glitch goes away (if you can think of a better way, let me know, but this works.)
+  - To get this update, you will need to install and start the pigpio service as described above in the Software, [pigpio section](#pigpio)
+* If there are updates to this project at any time, and you want them, just pull them.
+  ```
+  cd ~/pitft_buttons
+  git pull
+  sudo systemctl stop pitft_buttons.service
+  sudo systemctl start pitft_buttons.service
+  ```
 
+## Modifications and Improvements
 
-## Modifications
-
-Go for it. You can do it.
+Submit pull requests. Go for it. You can do it.
