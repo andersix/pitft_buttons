@@ -70,9 +70,9 @@ class Buttons_PiTFTplus():
         """
         ht = self.hold_time
         if ht >= 5.0:
-            sproc.check_call(['/sbin/poweroff'])
+            os.system('sudo poweroff')
         elif ht >= 2.0:
-            sproc.check_call(['/sbin/reboot'])
+            os.system('sudo reboot')
         else:
             self.hold_time = 0.0
 
