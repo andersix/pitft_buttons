@@ -246,7 +246,9 @@ If not check
 * **2022-5-09**
   Now using the pigpio factory. Why? I was annoyed that the PWMLED would _flash_, or _glitch_ the display backlight randomly when dimmed. By changing to the pigpio factory, this annoying glitch goes away (if you can think of a better way, let me know, but this works.)
   - To get this update, you will need to install and start the pigpio service as described above in the Software, [pigpio section](#pigpio)
-* If there are updates to this project at any time, and you want them, just pull them.
+  - also updated buttons 1 and 2 to press-and-hold for 1 second
+
+* When there are updates to this project, and you want them, just pull them.
   ```
   cd ~/pitft_buttons
   git pull
