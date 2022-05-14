@@ -188,8 +188,9 @@ I'm using this for PiHole status display, so let's use padd.sh
 cd ~
 git clone https://github.com/pi-hole/PADD.git
 ```
-Then have padd.sh launch at boot time.
-Edit your ~/.bashrc and at the bottom put:
+Then have padd.sh launch at boot time:
+
+Edit the pi users ~/.bashrc and at the bottom put:
 ```
 # Run PADD
 # If we're on the PiTFT screen (ssh is xterm)
@@ -222,25 +223,42 @@ That's it. The buttons should be working as described above. If you have issues,
 
 ## Troubleshooting
 
-Check the status of the program at any time with the command:
-```
-sudo systemctl status pitft_buttons.service
-```
-This should produce output similar to:
-```
-● pitft_buttons.service - PiTFT GPIO buttons
-   Loaded: loaded (/home/pi/PiTFT28_buttons/pitft_buttons.service; enabled; vendor preset: enabled)
-   Active: active (running) since Wed 2020-12-02 21:33:39 MST; 21h ago
- Main PID: 609 (python3)
-    Tasks: 5 (limit: 1601)
-   CGroup: /system.slice/pitft_buttons.service
-           └─609 /usr/bin/python3 /usr/local/bin/pitft_buttons.py
-```
+* Check the status of the GPIOD service with the command:
+  ```
+  $ sudo systemctl status pigpiod.service
+  ```
+  - This should produce output similar to:
+    ```
+    ● pigpiod.service - Pigpio daemon
+       Loaded: loaded (/home/pi/pitft_buttons/pigpiod.service; enabled; vendor preset: enabled)
+       Active: active (running) since Fri 2022-05-13 16:18:03 MDT; 15h ago
+      Process: 497 ExecStart=/usr/bin/pigpiod -m -n localhost (code=exited, status=0/SUCCESS)
+     Main PID: 512 (pigpiod)
+        Tasks: 5 (limit: 1716)
+       CGroup: /system.slice/pigpiod.service
+               └─512 /usr/bin/pigpiod -m -n localhost
+    ```
+
+* Check the status of the PITFT program at any time with the command:
+  ```
+  sudo systemctl status pitft_buttons.service
+  ```
+  - This should produce output similar to:
+    ```
+    ● pitft_buttons.service - PiTFT GPIO buttons
+       Loaded: loaded (/home/pi/PiTFT28_buttons/pitft_buttons.service; enabled; vendor preset: enabled)
+       Active: active (running) since Wed 2020-12-02 21:33:39 MST; 21h ago
+     Main PID: 609 (python3)
+        Tasks: 5 (limit: 1601)
+       CGroup: /system.slice/pitft_buttons.service
+               └─609 /usr/bin/python3 /usr/local/bin/pitft_buttons.py
+    ```
 You should have "Active: active (running)".
 If not check
  * for syntax errors in python code, if you modified it.
  * python file location
  * python and/or service file permissions
+ * check journald logs using ```journalctl``` for an errors involving this script
 
 ## Updates
 * **2022-5-09**
