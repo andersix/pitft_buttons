@@ -97,16 +97,22 @@ TODO: insert image
   - https://docs.pi-hole.net/main/basic-install/
 * If you already have PiHole running, move along...
 
+#### pip3
+If you don't have pip3, install it with
+```
+sudo apt install python3-pip
+```
+
 #### Git
 If you don't have git, install it with
 ```
 sudo apt install git
 ```
 
-#### pip3
-If you don't have pip3, install it with
+#### GitPython
+If you don't have git python, install it with
 ```
-sudo apt install python3-pip
+sudo pip3 install GitPython
 ```
 
 #### gpiozero
@@ -129,7 +135,7 @@ sudo apt install pigpio
   - select OK then Finish to exit raspi-config
 * link the pigiod.service file to the systemd directory
   - ```cd ~/pitft_buttons```
-  - ```sudo ln -s pigpiod.service /etc/systemd/system/.```
+  - ```sudo ln -s /home/pi/pitft_buttons/pigpiod.service /etc/systemd/system/```
 * enable and start the gpio service
   - ```sudo systemctl enable pigpiod```
   - ```sudo systemctl start pigpiod```
@@ -264,6 +270,7 @@ If not check
 * **2022-5-09**
   Now using the pigpio factory. Why? I was annoyed that the PWMLED would _flash_, or _glitch_ the display backlight randomly when dimmed. By changing to the pigpio factory, this annoying glitch goes away (if you can think of a better way, let me know, but this works.)
   - To get this update, you will need to install and start the pigpio service as described above in the Software, [pigpio section](#pigpio)
+  - Script now uses [Git Python](#GitPython), so install that if you don't already have it. 
   - also updated buttons 1 and 2 to press-and-hold for 1 second
 
 * When there are updates to this project, and you want them, just pull them.
