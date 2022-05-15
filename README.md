@@ -270,7 +270,7 @@ If not check
 * **2022-5-09**
   Now using the pigpio factory. Why? I was annoyed that the PWMLED would _flash_, or _glitch_ the display backlight randomly when dimmed. By changing to the pigpio factory, this annoying glitch goes away (if you can think of a better way, let me know, but this works.)
   - To get this update, you will need to install and start the pigpio service as described above in the Software, [pigpio section](#pigpio)
-  - Script now uses [Git Python](#GitPython), so install that if you don't already have it. 
+  - Script now uses [Git Python](#GitPython) to pull updates for PADD, so install that if you don't already have it. Also make sure your PADD is a clone from the pi-hole repo, see [PADD section](#install-paddsh).
   - also updated buttons 1 and 2 to press-and-hold for 1 second
 
 * When there are updates to this project, and you want them, just pull them.
