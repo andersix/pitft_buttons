@@ -14,7 +14,7 @@ import signal
 import subprocess as sproc
 import git
 
-# Looking at display, with buttons on the left:
+# Looking at display, with buttons on the right:
 B0 = 17  # first  button from the top on PiTFT+
 B1 = 22  # second button from the top on PiTFT+
 B2 = 23  # third  button from the top on PiTFT+
