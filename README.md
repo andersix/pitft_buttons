@@ -8,14 +8,14 @@ I use this display on a running Pi-Hole to display the Pi-Hole status.
 The buttons are used for things like dimming the display, updating, and
 restarting or shuting down the Pi for maintenance, etc.
 
+<img src="https://github.com/andersix/pitft_buttons/blob/main/doc/img/PiHole_TFT_buttons.jpg" style=" width:480px; " >
+
 ## Use
 
 The code in pitft_buttons.py determines what each button's function is.
 
 The PiTFT 2.8" display has four buttons on GPIO 17, 22, 23, and 27.
 In the python code, they are button0, button1, button2, and button3 respectively.
-
-<img src="https://github.com/andersix/pitft_buttons/blob/main/doc/img/PiHole_TFT_buttons.jpg" style=" width:480px; " >
   
 #### Button Functions (From top to bottom)
 
@@ -92,7 +92,7 @@ In the python code, they are button0, button1, button2, and button3 respectively
 
 #### PiTFT Plus 2.8" TFT connected to Pi 40-pin GPIO connector
 
-TODO: insert image
+<img src="https://github.com/andersix/pitft_buttons/blob/main/doc/img/PiTFT_plugin.jpg" style=" width:480px; " >
 
 ### Software
 
