@@ -15,11 +15,11 @@ The code in pitft_buttons.py determines what each button's function is.
 The PiTFT 2.8" display has four buttons on GPIO 17, 22, 23, and 27.
 In the python code, they are button0, button1, button2, and button3 respectively.
 
-TODO: insert image
+<img src="https://github.com/andersix/pitft_buttons/blob/main/doc/img/PiHole_TFT_buttons.jpg" style=" width:480px; " >
+  
+#### Button Functions (From top to bottom)
 
-#### Button Functions
-
-* Button 0 (GPIO 17):
+* Button 0, top-most button (GPIO 17):
   - Dim display backlight by 1/8th of full brightness for each press until display reaches "off" state.
     - When in the "off" state, the next button press turns display backlight back to full brightness.
       The PiTFT backlight LEDs are connected to GPIO 18. Brightness is set by PWM to this GPIO. The PWM is gamma-corrected so the 1/8th steps "look good".
@@ -61,6 +61,10 @@ TODO: insert image
     - https://www.adafruit.com/product/2807
   - Pi Model B+ / Pi 2 / Pi 3 - Case Base and Faceplate Pack - Clear - for 2.8" PiTFT
     - https://www.adafruit.com/product/3062
+
+<img src="https://github.com/andersix/pitft_buttons/blob/main/doc/img/PiTFT_buttons_parts.jpg" style=" width:480px; " >
+
+
 
 ### Software
 
