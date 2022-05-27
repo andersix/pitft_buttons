@@ -86,6 +86,9 @@ In the python code, they are button0, button1, button2, and button3 respectively
   - Tested on Version: 1.5.1, or later
   - Homepage: http://gpiozero.readthedocs.io/
 
+* pitft_buttons
+  - this repository!
+
 ## Installation
 
 ### Hardware
@@ -127,6 +130,11 @@ sudo apt install python3-gpiozero
 or
 ```
 sudo pip3 install gpiozero
+```
+#### Get pitft buttons (this repository)
+```
+cd ~
+git clone https://github.com/andersix/pitft_buttons.git
 ```
 
 #### pigpio
@@ -216,12 +224,10 @@ fi
 #### Reboot and return to here
 After this reboot, the dipslay should show the PADD status screen for your PiHole.
 
-Now let's install the buttons code:
+Now let's get the buttons code working:
 
-#### Install pitft buttons code and link the systemd service
+#### Link pitft buttons script and systemd service
 ```
-cd ~
-git clone https://github.com/andersix/pitft_buttons.git
 cd ~/pitft_buttons
 chmod +x pitft_buttons.py
 sudo ln -s ~/pitft_buttons/pitft_buttons.py /usr/local/bin/.
